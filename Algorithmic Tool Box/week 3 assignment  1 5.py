@@ -7,24 +7,15 @@ Segment = namedtuple('Segment', 'start end')
 
 def optimal_points(segments):
     points = []
-
-    while(len(segments) > 0):
-        min_right = choose_min_right_segment(segments)
-        points.append(min_right)
-        loop i < len(segments):
-            if include_point(segments[i], min_right):
-                del segments[i]
-            else:
-                i = i + 1
-
+    segments.sort(key = lambda segments: segments[1])
+    points.append(segments[0].end)
+    i = 0
+    while i < len(segments):
+        if segments[i].start <= points[-1] <= segments[i].end:
+            del segments[i]
+        else:
+            points.append(segments[i].end)
     return points
-
-def include_point(segment, point):
-    for i in points :
-
-
-def choose_min_right_segment(segments):
-    #choose the minmum right value in segments. Just loop through segments and choose min_right
 
 if __name__ == '__main__':
     input = sys.stdin.read()
@@ -34,4 +25,5 @@ if __name__ == '__main__':
     print(len(points))
     print(*points)
 
-#3 1 3 2 5 3 6
+# 3 1 3 2 5 3 6
+# 4 4 7 1 3 2 5 5 6
